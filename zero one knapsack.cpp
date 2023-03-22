@@ -44,18 +44,19 @@ int main()
             else
             {
                 mini = j-weight[i-1]; ///we have to do minus the taken weight from total capacity
-                if(knap[i-1][mini]+price[i-1]>=knap[i-1][j]) ///add the price of this index with resulted capacity
+                /*if(knap[i-1][mini]+price[i-1]>=knap[i-1][j]) ///add the price of this index with resulted capacity
                 {
                     knap[i][j] = knap[i-1][mini]+price[i-1];
                 }
                 else
                 {
                     knap[i][j] = knap[i-1][j];
-                }
+                }*/
+               knap[i][j] = max (knap[i-1][mini]+price[i-1],knap[i-1][j]);
             }
         }
     }
-    cout<<"Print the knapsack table: ";
+    cout<<"Print the knapsack table: "<<endl;
     for(int i=0; i<=a; i++)
     {
         for(int j=0; j<=b; j++)
@@ -64,7 +65,7 @@ int main()
         }
         cout<<endl;
     }
-    int cnt=0;
+    int cnt=0,sum=0;
     int i=a;
     int j=b;
     vector<int>w;
@@ -73,8 +74,8 @@ int main()
     {
         if(knap[i][j]!=knap[i-1][j])
         {
-            w.push_back(i);
-            p.push_back(price[i]);
+            w.push_back(weight[i-1]);
+            p.push_back(price[i-1]);
             cap-=weight[i-1];
             i--;
             j = cap;
@@ -84,7 +85,6 @@ int main()
         {
             i--;
         }
-
     }
     cout<<"Total selected item: "<<" "<<cnt<<endl;
     reverse(w.begin(),w.end());
@@ -99,5 +99,7 @@ int main()
     for(int i=0; i<p.size(); i++)
     {
         cout<<p[i]<<" ";
+        sum+=p[i];
     }
+    cout<<"Profit: "<<" "<<sum;
 }
