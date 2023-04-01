@@ -1,4 +1,3 @@
-
 #include<bits/stdc++.h>
 #define sazida() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 using namespace std;
@@ -31,13 +30,9 @@ int main()
     {
         for(int j=1;j<=b;j++)
         {
-            if(coin[i-1]==1)
+            if(coin[i-1]>j)
             {
-                change[i][j] = j;
-            }
-            else if(coin[i-1]>j)
-            {
-                change[i][j] = j;
+                change[i][j] = change[i-1][j];
             }
             else
             {
@@ -70,7 +65,6 @@ int main()
         {
             v.push_back(coin[i-1]);
             total-=coin[i-1];
-            i--;
             j = total;
             cnt++;
         }
